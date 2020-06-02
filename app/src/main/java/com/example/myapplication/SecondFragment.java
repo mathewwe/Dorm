@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,15 @@ public class SecondFragment extends Fragment {
             public void onClick(View view) {
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                Log.d("EVENT", "we clickin");
+            }
+        });
+        view.findViewById(R.id.seekBar).setOnDragListener(new View.OnDragListener() {
+
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+                Log.d("EVENT", "we draggin");
+                return false;
             }
         });
     }
