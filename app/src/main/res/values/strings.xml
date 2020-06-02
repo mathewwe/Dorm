@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="party">Party Mode</string>
+    <string name="ra">RA Mode</string>
+    <string name="chill">Chill Mode</string>
+    <string name="wake">Wake-Up Mode</string>
+    <string name="sleep">Sleep Mode</string>
+    <string name="custom">Custom Settings</string>
+    <string name="previous">Back to Menu</string>
+
+    <string name="hello_first_fragment">What would you like to do today?</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>
