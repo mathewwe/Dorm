@@ -13,5 +13,5 @@
     <string name="previous">Back to Menu</string>
 
     <string name="hello_first_fragment">What would you like to do today?</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_second_fragment">Custom Settings</string>
 </resources>
