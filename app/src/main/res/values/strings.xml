@@ -12,6 +12,10 @@
     <string name="custom">Custom Settings</string>
     <string name="previous">Back to Menu</string>
 
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
+
     <string name="hello_first_fragment">What would you like to do today?</string>
     <string name="hello_second_fragment">Custom Settings</string>
 </resources>
