@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
@@ -7,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -94,6 +97,10 @@ public class SecondFragment extends Fragment {
         SeekBar seekBar3 = getView().findViewById(R.id.seekBar3);
         seekBar3.setOnSeekBarChangeListener(seekBarChangeListener3);
 
+        Switch smartLights = getView().findViewById(R.id.switch1);
+        Switch door = getView().findViewById(R.id.switch2);
+        Switch ottomanEmpire = getView().findViewById(R.id.switch3);
+
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,6 +114,41 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                Log.d("EVENT", "beer baby");
+            }
+        });
+
+        view.findViewById(R.id.imageButton2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("EVENT", "spotify bby");
+                Intent launchIntent = getActivity().getPackageManager().getLaunchIntentForPackage("com.spotify.music");
+                if (launchIntent != null) {
+                    startActivity(launchIntent);//null pointer check in case package name was not found
+                }
+            }
+        });
+
+        smartLights.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                Log.d("On:", ""+isChecked);
+            }
+        });
+
+        door.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                Log.d("Locked:", ""+isChecked);
+            }
+        });
+
+        ottomanEmpire.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                Log.d("Lit:", ""+isChecked);
             }
         });
 
