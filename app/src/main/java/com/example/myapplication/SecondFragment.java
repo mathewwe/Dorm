@@ -54,6 +54,25 @@ public class SecondFragment extends Fragment {
         }
     };
 
+    SeekBar.OnSeekBarChangeListener seekBarChangeListener3 = new SeekBar.OnSeekBarChangeListener() {
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            // updated continuously as the user slides the thumb
+            Log.d("Progress 3: ", "" + progress);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            // called when the user first touches the SeekBar
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            // called after the user finishes moving the SeekBar
+        }
+    };
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -72,6 +91,9 @@ public class SecondFragment extends Fragment {
         SeekBar seekBar2 = getView().findViewById(R.id.seekBar2);
         seekBar2.setOnSeekBarChangeListener(seekBarChangeListener2);
 
+        SeekBar seekBar3 = getView().findViewById(R.id.seekBar3);
+        seekBar3.setOnSeekBarChangeListener(seekBarChangeListener3);
+
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,5 +102,13 @@ public class SecondFragment extends Fragment {
                 Log.d("EVENT", "we clickin");
             }
         });
+
+        view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Log.d("EVENT", "beer baby");
+            }
+        });
+
     }
 }
