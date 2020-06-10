@@ -74,9 +74,9 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "on");
                 sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "off");
-                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "locked");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "created");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "poppin");
+                sendPacket("http://192.168.1.23:8080/postplain/", "lock_status", "locked");
+                sendPacket("http://192.168.1.22:8080/postplain/", "ottoman_status", "created");
+                sendPacket("http://192.168.1.20:8080/postplain/", "ass_status", "poppin");
 
             }
         });
@@ -86,9 +86,9 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "off");
                 sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "on");
-                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "locked");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "destroyed");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "not_poppin");
+                sendPacket("http://192.168.1.23:8080/postplain/", "lock_status", "locked");
+                sendPacket("http://192.168.1.22:8080/postplain/", "ottoman_status", "destroyed");
+                sendPacket("http://192.168.1.20:8080/postplain/", "ass_status", "not_poppin");
             }
         });
 
@@ -97,9 +97,9 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "on"); //light up blue
                 sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "off");
-                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "unlocked");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "destroyed");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "not_poppin"); //light up some other color (green?)
+                sendPacket("http://192.168.1.23:8080/postplain/", "lock_status", "unlocked");
+                sendPacket("http://192.168.1.22:8080/postplain/", "ottoman_status", "destroyed");
+                sendPacket("http://192.168.1.20:8080/postplain/", "ass_status", "not_poppin"); //light up some other color (green?)
             }
         });
 
@@ -108,9 +108,9 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "on");
                 sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "on");
-                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "locked");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "created");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "poppin");
+                sendPacket("http://192.168.1.23:8080/postplain/", "lock_status", "locked");
+                sendPacket("http://192.168.1.22:8080/postplain/", "ottoman_status", "created");
+                sendPacket("http://192.168.1.20:8080/postplain/", "ass_status", "poppin");
             }
         });
 
@@ -119,9 +119,9 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "off");
                 sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "off");
-                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "locked");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "destroyed");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "not_poppin");
+                sendPacket("http://192.168.1.23:8080/postplain/", "lock_status", "locked");
+                sendPacket("http://192.168.1.22:8080/postplain/", "ottoman_status", "destroyed");
+                sendPacket("http://192.168.1.20:8080/postplain/", "ass_status", "not_poppin");
             }
         });
 
@@ -137,9 +137,9 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "on");
                 sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "off");
-                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "locked");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "created");
-                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "poppin");
+                sendPacket("http://192.168.1.23:8080/postplain/", "lock_status", "locked");
+                sendPacket("http://192.168.1.22:8080/postplain/", "ottoman_status", "created");
+                sendPacket("http://192.168.1.20:8080/postplain/", "ass_status", "poppin");
             }
         });
     }
