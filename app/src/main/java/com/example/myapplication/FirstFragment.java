@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,6 +23,40 @@ import java.util.Map;
 
 public class FirstFragment extends Fragment {
 
+    public void sendPacket(final String url, final String label, final String value){
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                        Toast.makeText(getActivity().getApplicationContext(), "Could not find node with IP " + url, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<>();
+                params.put(label, value);
+
+                return params;
+            }
+        };
+        queue.add(postRequest);
+    }
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -37,67 +72,56 @@ public class FirstFragment extends Fragment {
         view.findViewById(R.id.button_1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-                String url ="http://192.168.1.34:80/postplain/";
+                sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "on");
+                sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "off");
+                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "locked");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "created");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "poppin");
 
-                StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>()
-                        {
-                            @Override
-                            public void onResponse(String response) {
-                                // response
-                                Log.d("Response", response);
-                            }
-                        },
-                        new Response.ErrorListener()
-                        {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // error
-                                Log.d("Error.Response", error.toString());
-                            }
-                        }
-                ) {
-                    @Override
-                    protected Map<String, String> getParams()
-                    {
-                        Map<String, String> params = new HashMap<>();
-                        params.put("r", "fool");
-                        params.put("g", "fools");
-                        params.put("b", "fools");
-
-                        return params;
-                    }
-                };
-                queue.add(postRequest);
             }
         });
 
         view.findViewById(R.id.button_2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "off");
+                sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "on");
+                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "locked");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "destroyed");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "not_poppin");
             }
         });
 
         view.findViewById(R.id.button_3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "on"); //light up blue
+                sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "off");
+                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "unlocked");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "destroyed");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "not_poppin"); //light up some other color (green?)
             }
         });
 
         view.findViewById(R.id.button_4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "on");
+                sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "on");
+                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "locked");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "created");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "poppin");
             }
         });
 
         view.findViewById(R.id.button_5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "off");
+                sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "off");
+                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "locked");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "destroyed");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "not_poppin");
             }
         });
 
@@ -106,6 +130,16 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
+            }
+        });
+        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "on");
+                sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "off");
+                sendPacket("http://192.168.1.36:8080/postplain/", "lock_status", "locked");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ottoman_status", "created");
+                sendPacket("http://192.168.1.37:8080/postplain/", "ass_status", "poppin");
             }
         });
     }
