@@ -153,4 +153,25 @@ public class SecondFragment extends Fragment {
         });
 
     }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Switch smartLights = getView().findViewById(R.id.switch1);
+        Switch door = getView().findViewById(R.id.switch2);
+        Switch ottomanEmpire = getView().findViewById(R.id.switch3);
+
+
+        view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendPacket("http://192.168.1.33:8080/postplain/", "beer_cannon", "launched"); // Mat fill in your other node for the beer cannon.
+            }
+        });
+
+        view.findViewById(R.id.switch1).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "on");
+        });
+
+    }
 }
