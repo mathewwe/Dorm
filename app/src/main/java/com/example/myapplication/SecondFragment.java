@@ -11,13 +11,57 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class SecondFragment extends Fragment {
 
+    public void sendPacket(final String url, final String label, final String value){
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                        Toast.makeText(getActivity().getApplicationContext(), "Could not find node with IP " + url, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<>();
+                params.put(label, value);
+
+                return params;
+            }
+        };
+        queue.add(postRequest);
+    }
 
     SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
 
@@ -100,6 +144,7 @@ public class SecondFragment extends Fragment {
         Switch smartLights = getView().findViewById(R.id.switch1);
         Switch door = getView().findViewById(R.id.switch2);
         Switch ottomanEmpire = getView().findViewById(R.id.switch3);
+        Switch houseLights = getView().findViewById(R.id.switch4);
 
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,19 +173,16 @@ public class SecondFragment extends Fragment {
             }
         });
 
-        smartLights.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // do something, the isChecked will be
-                // true if the switch is in the On position
-                Log.d("On:", ""+isChecked);
-            }
-        });
-
         door.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
                 // true if the switch is in the On position
-                Log.d("Locked:", ""+isChecked);
+                if(isChecked){
+                    sendPacket("http://192.168.1.23:8080/postplain/", "lock_status", "locked");
+                }
+                else {
+                    sendPacket("http://192.168.1.23:8080/postplain/", "lock_status", "" + "unlocked");
+                }
             }
         });
 
@@ -148,19 +190,14 @@ public class SecondFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
                 // true if the switch is in the On position
-                Log.d("Lit:", ""+isChecked);
+                if(isChecked){
+                    sendPacket("http://192.168.1.23:8080/postplain/", "ottoman_status", "created");
+                }
+                else {
+                    sendPacket("http://192.168.1.23:8080/postplain/", "ottoman_status", "" + "destroyed");
+                }
             }
         });
-
-    }
-
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        Switch smartLights = getView().findViewById(R.id.switch1);
-        Switch door = getView().findViewById(R.id.switch2);
-        Switch ottomanEmpire = getView().findViewById(R.id.switch3);
-
 
         view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,8 +206,28 @@ public class SecondFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.switch1).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "on");
+        smartLights.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "on");
+                }
+                else{
+                    sendPacket("http://192.168.1.34:8080/postplain/", "led_status", "off");
+                }
+            }
+        });
+
+        houseLights.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "on");
+                }
+                else{
+                    sendPacket("http://192.168.1.35:8080/postplain/", "houselight_status", "off");
+                }
+            }
         });
 
     }
